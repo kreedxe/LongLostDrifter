@@ -9,18 +9,28 @@
 
 class Engine {
 
+// private attributes
 private:
     sf::RenderWindow window;
     sf::Clock clock;
+    
+    bool isMetricsWindowOpened;
+    bool isAboutImGuiWindowOpened;
 
+// public methods
 public:
     Engine();
     ~Engine();
 
     bool init();
     bool update();
-    void draw();
+    void render();
 
     bool isOpen();
+
+// private methods
+private:
+    void imguiDraw();
+    void sfmlDraw();
 
 };
