@@ -61,7 +61,7 @@ void Engine::imguiDraw()
     // top menu bar
     if (ImGui::BeginMainMenuBar()) {
         if (ImGui::BeginMenu("Engine")) {
-            ImGui::MenuItem("Create");
+            ImGui::MenuItem("Settings");
             ImGui::MenuItem("About TheGame");
             ImGui::MenuItem("About ImGUI", NULL, &isAboutImGuiWindowOpened);
             ImGui::MenuItem("Quit");
@@ -91,4 +91,10 @@ void Engine::sfmlDraw()
 bool Engine::isOpen()
 {
     return window.isOpen();
+}
+
+
+sf::RenderWindow& Engine::getWindow()
+{
+    return window;
 }

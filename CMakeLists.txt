@@ -33,6 +33,8 @@ FetchContent_MakeAvailable(ImGui-SFML)
 
 set(SOURCES
     Engine/engine.cpp
+    Engine/player.cpp
+    Engine/resourceManager.cpp
 
     TheGame/main.cpp
 )
@@ -41,4 +43,4 @@ add_executable(GameBinary ${SOURCES})
 
 target_compile_features(GameBinary PRIVATE cxx_std_17)
 target_link_libraries(GameBinary PRIVATE SFML::Graphics ImGui-SFML::ImGui-SFML)
-target_include_directories(GameBinary PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Engine)
+target_include_directories(GameBinary PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Engine/)

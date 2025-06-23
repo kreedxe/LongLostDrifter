@@ -27,6 +27,7 @@ public:
     void render();
 
     bool isOpen();
+    sf::RenderWindow& getWindow();
 
 // private methods
 private:
