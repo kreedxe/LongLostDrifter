@@ -39,8 +39,34 @@ set(SOURCES
     TheGame/main.cpp
 )
 
+set (HEADERS)
+
 add_executable(GameBinary ${SOURCES})
 
 target_compile_features(GameBinary PRIVATE cxx_std_17)
 target_link_libraries(GameBinary PRIVATE SFML::Graphics ImGui-SFML::ImGui-SFML)
 target_include_directories(GameBinary PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Engine/)
+
+# List of all source files you want to format
+file(GLOB_RECURSE CLANG_FORMAT_FILES
+    "${CMAKE_SOURCE_DIR}/Engine/*.cpp"
+    "${CMAKE_SOURCE_DIR}/Engine/*.hpp"
+    "${CMAKE_SOURCE_DIR}/TheGame/*.cpp"
+    "${CMAKE_SOURCE_DIR}/TheGame/*.hpp"
+)
+
+# Optional: Path to clang-format (leave empty to use system default)
+find_program(CLANG_FORMAT_EXE NAMES clang-format)
+
+if (CLANG_FORMAT_EXE)
+    add_custom_target(format
+        COMMAND ${CLANG_FORMAT_EXE}
+                -i
+                -style=file
+                ${CLANG_FORMAT_FILES}
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Formatting all source files with clang-format"
+    )
+else()
+    message(WARNING "clang-format not found. The 'format' target will not be available.")
+endif()

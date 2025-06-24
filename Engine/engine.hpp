@@ -2,36 +2,31 @@
 
 #pragma once
 
-#include <imgui.h>
 #include <imgui-SFML.h>
+#include <imgui.h>
+
 #include <SFML/Graphics.hpp>
 
-
 class Engine {
+ private:
+  sf::RenderWindow sf_Window;
+  sf::Clock sf_Clock;
 
-// private attributes
-private:
-    sf::RenderWindow window;
-    sf::Clock clock;
-    
-    bool isMetricsWindowOpened;
-    bool isAboutImGuiWindowOpened;
+  bool is_MetricsWindowOpened;
+  bool is_AboutImGuiWindowOpened;
+  bool is_MenuBarShown;
 
-// public methods
-public:
-    Engine();
-    ~Engine();
+ public:
+  Engine(sf::Vector2u window_size, std::string window_title);
+  ~Engine();
 
-    bool init();
-    bool update();
-    void render();
+  bool init();
+  bool update();
+  void render();
+  bool isOpen();
+  sf::RenderWindow &getWindow();
 
-    bool isOpen();
-    sf::RenderWindow& getWindow();
-
-// private methods
-private:
-    void imguiDraw();
-    void sfmlDraw();
-
+ private:
+  void imguiDraw();
+  void sfmlDraw();
 };

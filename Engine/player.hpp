@@ -2,25 +2,29 @@
 
 #pragma once
 
-
-#include <imgui.h>
 #include <imgui-SFML.h>
+#include <imgui.h>
+
 #include <SFML/Graphics.hpp>
 #include <resourceManager.hpp>
 
+class Player {
+ private:
+  sf::Vector2f position;
+  sf::Texture* Texture;
+  sf::Sprite Sprite;
 
-class Player 
-{
+  int Texture_Xtiles;
+  int Texture_Ytiles;
+  int Texture_TileSizeX;
+  int Texture_TileSizeY;
 
-private:
-    sf::Vector2f position;
-    sf::Texture* texture;
-    sf::Sprite sprite;
+  sf::Vector2i Texture_CurrentTile;
 
-public:
-    Player(ResourceManager* resourceManager, int textureID);
-    ~Player();
+ public:
+  Player(ResourceManager* resourceManager, int textureID, int Xtiles,
+         int Ytiles, sf::Vector2i idleTile);
+  ~Player();
 
-    void draw(sf::RenderWindow& window);
-
+  void draw(sf::RenderWindow& window);
 };
