@@ -1,29 +1,33 @@
 
 
+#include <sprite.hpp>
+
 #include "engine.hpp"
 #include "player.hpp"
-#include "resourceManager.hpp"
 
 int main() {
-  Engine game({1400, 700}, "Lost Lore v0.0.1 SFML + IMGUI");
+    Engine game;
+    game.createWindow({1400, 700}, "LongLostDrifter");
 
-  // returns false if engine couldn't initialize
-  if (!game.init()) {
-    return -1;
-  }
-
-  ResourceManager resManager;
-  resManager.loadTexture("../TheGame/resources/spritesheets/Drifter.png");
-
-  Player drifter(&resManager, 1, 7, 11, sf::Vector2i(0, 0));
-
-  while (game.isOpen()) {
-    // returns false if the app was closed
-    if (!game.update()) {
-      return 0;
+    // returns false if engine couldn't initialize
+    if (!game.initRenderer()) {
+        return -1;
     }
 
-    drifter.draw(game.getWindow());
-    game.render();
-  }
+    game.resourceManager->loadTexture(
+        "../TheGame/resources/spritesheets/Drifter.png");
+
+    Player Drifter(&game);
+    Sprite Drifter_Sprite(&game, 1, 7, 11);
+    Drifter.setSprite(&Drifter_Sprite);
+
+    while (game.isOpen()) {
+        // returns false if the app was closed
+        if (!game.update()) {
+            return 0;
+        }
+
+        Drifter.draw(game.getWindow());
+        game.render();
+    }
 }

@@ -6,27 +6,32 @@
 #include <imgui.h>
 
 #include <SFML/Graphics.hpp>
+#include <resourceManager.hpp>
 
 class Engine {
- private:
-  sf::RenderWindow sf_Window;
-  sf::Clock sf_Clock;
+public:
+    ResourceManager* resourceManager;
 
-  bool is_MetricsWindowOpened;
-  bool is_AboutImGuiWindowOpened;
-  bool is_MenuBarShown;
+private:
+    sf::RenderWindow* sf_Window;
+    sf::Clock* sf_Clock;
 
- public:
-  Engine(sf::Vector2u window_size, std::string window_title);
-  ~Engine();
+    bool is_MetricsWindowOpened;
+    bool is_AboutImGuiWindowOpened;
+    bool is_MenuBarShown;
 
-  bool init();
-  bool update();
-  void render();
-  bool isOpen();
-  sf::RenderWindow &getWindow();
+public:
+    Engine();
+    ~Engine();
 
- private:
-  void imguiDraw();
-  void sfmlDraw();
+    void createWindow(sf::Vector2u size, std::string title);
+    bool initRenderer();
+    bool update();
+    void render();
+    bool isOpen();
+    sf::RenderWindow* getWindow();
+
+private:
+    void imguiDraw();
+    void sfmlDraw();
 };

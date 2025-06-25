@@ -35,6 +35,7 @@ set(SOURCES
     Engine/engine.cpp
     Engine/player.cpp
     Engine/resourceManager.cpp
+    Engine/sprite.cpp
 
     TheGame/main.cpp
 )
