@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.30)
-project(SFML-IMGUI-GAME 
+project(proj-LongLostDrifter 
         VERSION 0.0.1
         LANGUAGES CXX)
 
@@ -41,11 +41,11 @@ set(SOURCES
 
 set (HEADERS)
 
-add_executable(GameBinary ${SOURCES})
+add_executable(LongLostDrifter ${SOURCES})
 
-target_compile_features(GameBinary PRIVATE cxx_std_17)
-target_link_libraries(GameBinary PRIVATE SFML::Graphics ImGui-SFML::ImGui-SFML)
-target_include_directories(GameBinary PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Engine/)
+target_compile_features(LongLostDrifter PRIVATE cxx_std_17)
+target_link_libraries(LongLostDrifter PRIVATE SFML::Graphics ImGui-SFML::ImGui-SFML)
+target_include_directories(LongLostDrifter PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Engine/)
 
 # List of all source files you want to format
 file(GLOB_RECURSE CLANG_FORMAT_FILES
