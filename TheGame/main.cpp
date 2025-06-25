@@ -27,6 +27,7 @@ int main() {
             return 0;
         }
 
+        Drifter.update();
         Drifter.draw(game.getWindow());
         game.render();
     }

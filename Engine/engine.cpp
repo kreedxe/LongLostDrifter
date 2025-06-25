@@ -2,12 +2,15 @@
 
 #include "engine.hpp"
 
+#include <iostream>
+
 Engine::Engine()
     : sf_Window(nullptr),
       sf_Clock(nullptr),
       is_MetricsWindowOpened(false),
       is_AboutImGuiWindowOpened(false),
       is_MenuBarShown(false),
+      DeltaTime(1),
       resourceManager(new ResourceManager()) {}
 
 Engine::~Engine() {
@@ -55,7 +58,9 @@ bool Engine::update() {
         }
     }
 
-    ImGui::SFML::Update(*sf_Window, sf_Clock->restart());
+    sf::Time dt = sf_Clock->restart();
+    DeltaTime = std::round(dt.asMilliseconds() / 16.6f * 100.0f) / 100.0f;
+    ImGui::SFML::Update(*sf_Window, dt);
 
     imguiDraw();
     sf_Window->clear();

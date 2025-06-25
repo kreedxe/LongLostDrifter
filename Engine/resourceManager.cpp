@@ -16,6 +16,8 @@ int ResourceManager::loadTexture(std::string path) {
     sf::Texture* texture = new sf::Texture();
     if (texture->loadFromFile(path)) {
         textures.push_back(texture);
+        std::cout << "Loaded texture: " << path << " with ID "
+                  << textures.size() << std::endl;
     } else {
         std::cout << "Failed to load texture: " << path << " with ID "
                   << textures.size() << std::endl;

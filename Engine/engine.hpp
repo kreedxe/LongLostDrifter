@@ -11,6 +11,7 @@
 class Engine {
 public:
     ResourceManager* resourceManager;
+    float DeltaTime;
 
 private:
     sf::RenderWindow* sf_Window;

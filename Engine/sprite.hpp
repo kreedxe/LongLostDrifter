@@ -9,20 +9,24 @@
 
 class Sprite {
 public:
-    sf::Sprite* sf_Sprite;
+    sf::Sprite* s_Sprite = nullptr;
 
 private:
-    Engine* game;
-    sf::Texture* sf_Texture;
+    Engine* s_Engine = nullptr;
 
-    sf::Vector2u Texture_Tiles;
-    sf::Vector2f Texture_TileSize;
-    sf::Vector2u Texture_Size;
+    sf::Texture* s_Texture = nullptr;
+    sf::Vector2u s_Texture_Size = {1, 1};
+    uint s_Texture_ID = 0;
 
-    sf::Vector2u Tilesets_Idle;
-    uint textureID;
+    sf::Vector2u s_Tile_Amount = {1, 1};
+    sf::Vector2i s_Tile_Size = {1, 1};
+
+    sf::Vector2i s_Tilesets_Idle = {0, 0};
 
 public:
     Sprite(Engine* engine, uint textureID, uint TilesInX, uint TilesInY);
     ~Sprite();
+
+private:
+    sf::IntRect getTileRect(sf::Vector2i Tile);
 };

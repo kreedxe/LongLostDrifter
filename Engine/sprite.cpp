@@ -2,27 +2,25 @@
 
 #include <sprite.hpp>
 
-Sprite::Sprite(Engine* engine, uint textureID, uint TilesInX, uint TilesInY)
-    : game(nullptr),
-      sf_Texture(nullptr),
-      sf_Sprite(nullptr),
-      Tilesets_Idle(sf::Vector2u(0, 0)),
-      textureID(0),
-      Texture_Size(sf::Vector2u()),
-      Texture_Tiles(sf::Vector2u()),
-      Texture_TileSize(sf::Vector2f()) {
-    game = engine;
-    this->textureID = textureID;
-    sf_Texture = game->resourceManager->getTexture(this->textureID);
-    sf_Sprite = new sf::Sprite(*sf_Texture);
+Sprite::Sprite(Engine* engine, uint textureID, uint TilesInX, uint TilesInY) {
+    s_Engine = engine;
+    s_Texture_ID = textureID;
+    s_Texture = s_Engine->resourceManager->getTexture(s_Texture_ID);
+    s_Sprite = new sf::Sprite(*s_Texture);
 
-    Texture_Size = sf_Texture->getSize();
-    Texture_Tiles = sf::Vector2u(TilesInX, TilesInY);
-    Texture_TileSize = sf::Vector2f(Texture_Size.x / Texture_Tiles.x,
-                                    Texture_Size.y / Texture_Tiles.y);
+    s_Texture_Size = s_Texture->getSize();
+    s_Tile_Amount = sf::Vector2u(TilesInX, TilesInY);
+    s_Tile_Size = sf::Vector2i(s_Texture_Size.x / s_Tile_Amount.x,
+                               s_Texture_Size.y / s_Tile_Amount.y);
 
-    sf_Sprite->setTextureRect(
-        sf::IntRect(sf::Vector2i(0, 0), sf::Vector2i(Texture_TileSize)));
+    s_Sprite->setTextureRect(getTileRect(s_Tilesets_Idle));
+    s_Sprite->setScale({5, 5});
 }
 
-Sprite::~Sprite() { delete sf_Sprite; }
+Sprite::~Sprite() { delete s_Sprite; }
+
+sf::IntRect Sprite::getTileRect(sf::Vector2i Tile) {
+    return sf::IntRect(
+        sf::Vector2i(Tile.x * s_Tile_Size.x, Tile.y * s_Tile_Size.y),
+        s_Tile_Size);
+}
